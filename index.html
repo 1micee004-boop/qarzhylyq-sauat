@@ -1,693 +1,897 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMART MONEY — Қаржылық сауаттылық</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root{
-      --olive:#66734f;
-      --olive-dark:#4f5c3c;
-      --olive-light:#e7eadf;
-      --milk:#f8f5ec;
-      --white:#ffffff;
-      --text:#25291f;
-      --muted:#73786c;
-      --danger:#b85b52;
-      --shadow:0 12px 35px rgba(52,62,39,.10);
-    }
+<title>SMART MONEY — Қаржылық сауаттылық</title>
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+<style>
+:root{
+  --olive:#66734f;
+  --olive-dark:#4f5c3c;
+  --olive-light:#e7eadf;
+  --milk:#f8f5ec;
+  --white:#ffffff;
+  --text:#25291f;
+  --muted:#73786c;
+  --danger:#b85b52;
+  --shadow:0 12px 35px rgba(52,62,39,.10);
+}
 
-    html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body{
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      background:var(--milk);
-      color:var(--text);
-      line-height:1.6;
-    }
+html{scroll-behavior:smooth}
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:100;
-      background:rgba(255,255,255,.94);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid #e9eadf;
-    }
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:var(--milk);
+  color:var(--text);
+  line-height:1.6;
+}
 
-    .nav{
-      max-width:1200px;
-      margin:auto;
-      min-height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:10px 20px;
-    }
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #e9eadf;
+}
 
-    .logo{
-      font-size:23px;
-      font-weight:900;
-      color:var(--olive-dark);
-      white-space:nowrap;
-    }
+.nav{
+  max-width:1200px;
+  margin:auto;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:10px 20px;
+}
 
-    nav{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      flex-wrap:wrap;
-    }
+.logo{
+  font-size:23px;
+  font-weight:900;
+  color:var(--olive-dark);
+  white-space:nowrap;
+}
 
-    nav button{
-      border:none;
-      background:transparent;
-      padding:9px 12px;
-      border-radius:10px;
-      cursor:pointer;
-      color:#50564a;
-      font-weight:600;
-    }
+nav{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+}
 
-    nav button:hover{
-      background:var(--olive-light);
-      color:var(--olive-dark);
-    }
+nav button{
+  border:none;
+  background:transparent;
+  padding:9px 10px;
+  border-radius:10px;
+  cursor:pointer;
+  color:#50564a;
+  font-weight:600;
+}
 
-    .language{
-      display:flex;
-      gap:4px;
-    }
+nav button:hover{
+  background:var(--olive-light);
+  color:var(--olive-dark);
+}
 
-    .language button{
-      border:1px solid #dfe2d7;
-      background:white;
-      padding:7px 9px;
-      border-radius:9px;
-      cursor:pointer;
-      font-weight:700;
-    }
+.right-nav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
-    .language button.active{
-      background:var(--olive);
-      color:white;
-    }
+.language{
+  display:flex;
+  gap:4px;
+}
 
-    .hero{
-      min-height:580px;
-      display:flex;
-      align-items:center;
-      background:
-        radial-gradient(circle at 90% 10%, #dfe6cf 0, transparent 35%),
-        linear-gradient(135deg,#faf8f1,#f1f3e8);
-    }
+.language button{
+  border:1px solid #dfe2d7;
+  background:white;
+  padding:7px 9px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
 
-    .hero-inner{
-      max-width:1200px;
-      width:100%;
-      margin:auto;
-      padding:80px 25px;
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      align-items:center;
-      gap:60px;
-    }
+.language button.active{
+  background:var(--olive);
+  color:white;
+}
 
-    .badge{
-      display:inline-block;
-      background:var(--olive-light);
-      color:var(--olive-dark);
-      padding:7px 13px;
-      border-radius:50px;
-      font-size:14px;
-      font-weight:800;
-      margin-bottom:18px;
-    }
+.account-btn{
+  border:none;
+  background:var(--olive);
+  color:white;
+  padding:9px 13px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800;
+  white-space:nowrap;
+}
 
-    h1{
-      font-size:clamp(42px,7vw,76px);
-      line-height:1;
-      color:var(--olive-dark);
-      margin-bottom:20px;
-    }
+.hero{
+  min-height:580px;
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(circle at 90% 10%, #dfe6cf 0, transparent 35%),
+    linear-gradient(135deg,#faf8f1,#f1f3e8);
+}
 
-    .hero p{
-      max-width:650px;
-      font-size:19px;
-      color:var(--muted);
-      margin-bottom:28px;
-    }
+.hero-inner{
+  max-width:1200px;
+  width:100%;
+  margin:auto;
+  padding:80px 25px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  align-items:center;
+  gap:60px;
+}
 
-    .primary{
-      border:none;
-      background:var(--olive);
-      color:white;
-      padding:14px 22px;
-      border-radius:12px;
-      cursor:pointer;
-      font-size:16px;
-      font-weight:800;
-      transition:.2s;
-    }
+.badge{
+  display:inline-block;
+  background:var(--olive-light);
+  color:var(--olive-dark);
+  padding:7px 13px;
+  border-radius:50px;
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:18px;
+}
 
-    .primary:hover{
-      background:var(--olive-dark);
-      transform:translateY(-2px);
-    }
+h1{
+  font-size:clamp(42px,7vw,76px);
+  line-height:1;
+  color:var(--olive-dark);
+  margin-bottom:20px;
+}
 
-    .money-card{
-      background:white;
-      padding:32px;
-      border-radius:28px;
-      box-shadow:var(--shadow);
-      transform:rotate(2deg);
-    }
+.hero p{
+  max-width:650px;
+  font-size:19px;
+  color:var(--muted);
+  margin-bottom:28px;
+}
 
-    .money-card .big{
-      font-size:45px;
-      font-weight:900;
-      color:var(--olive);
-    }
+.primary{
+  border:none;
+  background:var(--olive);
+  color:white;
+  padding:14px 22px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:800;
+  transition:.2s;
+}
 
-    .money-card p{
-      font-size:15px;
-      margin:5px 0;
-    }
+.primary:hover{
+  background:var(--olive-dark);
+  transform:translateY(-2px);
+}
 
-    section{
-      padding:85px 20px;
-    }
+.money-card{
+  background:white;
+  padding:32px;
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  transform:rotate(2deg);
+}
 
-    .container{
-      max-width:1100px;
-      margin:auto;
-    }
+.money-card .big{
+  font-size:42px;
+  font-weight:900;
+  color:var(--olive);
+}
 
-    .section-title{
-      margin-bottom:35px;
-    }
+.money-card p{
+  font-size:15px;
+  margin:5px 0;
+}
 
-    .section-title h2{
-      font-size:36px;
-      color:var(--olive-dark);
-      margin-bottom:8px;
-    }
+section{
+  padding:85px 20px;
+}
 
-    .section-title p{
-      color:var(--muted);
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:20px;
-    }
+.section-title{
+  margin-bottom:35px;
+}
 
-    .card{
-      background:white;
-      border-radius:20px;
-      padding:25px;
-      box-shadow:var(--shadow);
-    }
+.section-title h2{
+  font-size:36px;
+  color:var(--olive-dark);
+  margin-bottom:8px;
+}
 
-    .card h3{
-      color:var(--olive-dark);
-      margin-bottom:8px;
-    }
+.section-title p{
+  color:var(--muted);
+}
 
-    .definition{
-      border-left:4px solid var(--olive);
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
 
-    .calculator{
-      max-width:750px;
-      background:white;
-      padding:30px;
-      border-radius:24px;
-      box-shadow:var(--shadow);
-    }
+.card{
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:var(--shadow);
+}
 
-    label{
-      display:block;
-      font-weight:700;
-      margin:14px 0 7px;
-    }
+.card h3{
+  color:var(--olive-dark);
+  margin-bottom:8px;
+}
 
-    input{
-      width:100%;
-      border:1px solid #dcded4;
-      padding:14px;
-      border-radius:12px;
-      font-size:16px;
-      outline:none;
-    }
+.definition{
+  border-left:4px solid var(--olive);
+}
 
-    input:focus{
-      border-color:var(--olive);
-      box-shadow:0 0 0 3px #edf0e6;
-    }
+.calculator{
+  max-width:750px;
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+}
 
-    .result{
-      display:none;
-      margin-top:25px;
-    }
+label{
+  display:block;
+  font-weight:700;
+  margin:14px 0 7px;
+}
 
-    .result.active{
-      display:block;
-    }
+input{
+  width:100%;
+  border:1px solid #dcded4;
+  padding:14px;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+}
 
-    .salary-item{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      border-bottom:1px solid #eceee7;
-      padding:14px 3px;
-    }
+input:focus{
+  border-color:var(--olive);
+  box-shadow:0 0 0 3px #edf0e6;
+}
 
-    .salary-item:last-child{
-      border:none;
-    }
+.result{
+  display:none;
+  margin-top:25px;
+}
 
-    .salary-item strong{
-      color:var(--olive-dark);
-    }
+.result.active{
+  display:block;
+}
 
-    .advice{
-      margin-top:20px;
-      padding:18px;
-      border-radius:14px;
-      background:var(--olive-light);
-      color:var(--olive-dark);
-    }
+.salary-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #eceee7;
+  padding:14px 3px;
+}
 
-    .goal-result{
-      text-align:center;
-      padding:25px;
-      background:var(--olive-light);
-      border-radius:18px;
-      margin-top:20px;
-    }
+.salary-item:last-child{
+  border:none;
+}
 
-    .goal-result .months{
-      font-size:52px;
-      font-weight:900;
-      color:var(--olive-dark);
-    }
+.salary-item strong{
+  color:var(--olive-dark);
+}
 
-    .question{
-      background:#fafaf7;
-      border:1px solid #e7e8df;
-      padding:17px;
-      border-radius:14px;
-      margin-top:12px;
-    }
+.advice{
+  margin-top:20px;
+  padding:18px;
+  border-radius:14px;
+  background:var(--olive-light);
+  color:var(--olive-dark);
+}
 
-    .question p{
-      font-weight:700;
-      margin-bottom:10px;
-    }
+.goal-result{
+  text-align:center;
+  padding:25px;
+  background:var(--olive-light);
+  border-radius:18px;
+  margin-top:20px;
+}
 
-    .question label{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      margin-right:18px;
-      font-weight:500;
-      cursor:pointer;
-    }
+.goal-result .months{
+  font-size:52px;
+  font-weight:900;
+  color:var(--olive-dark);
+}
 
-    .question input{
-      width:auto;
-    }
+.question{
+  background:#fafaf7;
+  border:1px solid #e7e8df;
+  padding:17px;
+  border-radius:14px;
+  margin-top:12px;
+}
 
-    footer{
-      background:var(--olive-dark);
-      color:white;
-      text-align:center;
-      padding:30px;
-    }
+.question p{
+  font-weight:700;
+  margin-bottom:10px;
+}
 
-    @media(max-width:850px){
-      .nav{
-        flex-direction:column;
-        align-items:flex-start;
-      }
+.question label{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-right:18px;
+  font-weight:500;
+  cursor:pointer;
+}
 
-      nav{
-        width:100%;
-        overflow:auto;
-        flex-wrap:nowrap;
-      }
+.question input{
+  width:auto;
+}
 
-      nav button{
-        white-space:nowrap;
-      }
+footer{
+  background:var(--olive-dark);
+  color:white;
+  text-align:center;
+  padding:30px;
+}
 
-      .hero-inner{
-        grid-template-columns:1fr;
-      }
+/* AUTH */
 
-      .money-card{
-        transform:none;
-      }
+.auth-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-      .grid{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
+.auth-overlay.active{
+  display:flex;
+}
+
+.auth-card{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:25px;
+  padding:32px;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+  position:relative;
+}
+
+.auth-card h2{
+  color:var(--olive-dark);
+  margin-bottom:4px;
+}
+
+.auth-subtitle{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.close-auth{
+  position:absolute;
+  right:18px;
+  top:12px;
+  border:none;
+  background:none;
+  font-size:30px;
+  cursor:pointer;
+}
+
+.auth-switch{
+  text-align:center;
+  margin-top:18px;
+}
+
+.auth-link{
+  border:none;
+  background:none;
+  color:var(--olive-dark);
+  font-weight:900;
+  cursor:pointer;
+}
+
+.auth-message{
+  text-align:center;
+  margin-top:15px;
+  font-weight:700;
+}
+
+.user-box{
+  display:none;
+  background:var(--olive-light);
+  color:var(--olive-dark);
+  padding:15px;
+  border-radius:14px;
+  margin-bottom:20px;
+}
+
+.logout{
+  width:100%;
+  margin-top:15px;
+  border:1px solid #d8ddd0;
+  background:white;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800;
+}
+
+@media(max-width:900px){
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  nav{
+    width:100%;
+    overflow:auto;
+    flex-wrap:nowrap;
+  }
+
+  nav button{
+    white-space:nowrap;
+  }
+
+  .right-nav{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+
+  .money-card{
+    transform:none;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="nav">
-    <div class="logo">SMART MONEY</div>
+<div class="nav">
 
-    <nav>
-      <button onclick="goTo('home')" data-t="home">Басты бет</button>
-      <button onclick="goTo('definitions')" data-t="definitions">Анықтамалар</button>
-      <button onclick="goTo('salary')" data-t="salary">Жалақыны бөлу</button>
-      <button onclick="goTo('goal')" data-t="goal">Қанша айда жинай аламын?</button>
-      <button onclick="goTo('impulse')" data-t="impulse">Импульсивті сатып алу</button>
-    </nav>
+<div class="logo">SMART MONEY</div>
 
-    <div class="language">
-      <button id="kkBtn" class="active" onclick="setLanguage('kk')">KZ</button>
-      <button id="ruBtn" onclick="setLanguage('ru')">RU</button>
-      <button id="enBtn" onclick="setLanguage('en')">EN</button>
-    </div>
-  </div>
+<nav>
+<button onclick="goTo('home')" data-t="home">Басты бет</button>
+<button onclick="goTo('definitions')" data-t="definitions">Анықтамалар</button>
+<button onclick="goTo('salary')" data-t="salary">Жалақыны бөлу</button>
+<button onclick="goTo('goal')" data-t="goal">Қанша айда жинай аламын?</button>
+<button onclick="goTo('impulse')" data-t="impulse">Импульсивті сатып алу</button>
+</nav>
+
+<div class="right-nav">
+
+<div class="language">
+<button id="kkBtn" class="active" onclick="setLanguage('kk')">KZ</button>
+<button id="ruBtn" onclick="setLanguage('ru')">RU</button>
+<button id="enBtn" onclick="setLanguage('en')">EN</button>
+</div>
+
+<button id="accountButton" class="account-btn" data-t="login">
+👤 Кіру
+</button>
+
+</div>
+</div>
 </header>
 
 
 <section class="hero" id="home">
-  <div class="hero-inner">
+<div class="hero-inner">
 
-    <div>
-      <span class="badge" data-t="badge">Ақшаңды ақылмен басқар</span>
+<div>
+<span class="badge" data-t="badge">Ақшаңды ақылмен басқар</span>
 
-      <h1>SMART<br>MONEY</h1>
+<h1>SMART<br>MONEY</h1>
 
-      <p data-t="heroText">
-        Қаржыңды жоспарла, мақсатыңа жет және импульсивті
-        сатып алуларды азайт.
-      </p>
+<p data-t="heroText">
+Қаржыңды жоспарла, мақсатыңа жет және импульсивті сатып алуларды азайт.
+</p>
 
-      <button class="primary" onclick="goTo('salary')" data-t="start">
-        Бастау
-      </button>
-    </div>
+<button class="primary" onclick="goTo('salary')" data-t="start">
+Бастау
+</button>
+</div>
 
-    <div class="money-card">
-      <p data-t="principle">Қарапайым қағида</p>
-      <div class="big">55 · 5 · 10 · 15 · 15</div>
-      <p data-t="principleText">
-        Жалақыны мақсаттарға бөліп, әр теңгеге міндет бер.
-      </p>
-    </div>
+<div class="money-card">
+<p data-t="principle">Қарапайым қағида</p>
+<div class="big">55 · 5 · 10 · 15 · 15</div>
+<p data-t="principleText">
+Жалақыны мақсаттарға бөліп, әр теңгеге міндет бер.
+</p>
+</div>
 
-  </div>
+</div>
 </section>
 
 
 <section id="definitions">
-  <div class="container">
+<div class="container">
 
-    <div class="section-title">
-      <h2 data-t="definitions">Анықтамалар</h2>
-      <p data-t="definitionsSub">
-        Қаржыны жоспарлауда қолданылатын негізгі ұғымдар.
-      </p>
-    </div>
+<div class="section-title">
+<h2 data-t="definitions">Анықтамалар</h2>
+<p data-t="definitionsSub">
+Қаржыны жоспарлауда қолданылатын негізгі ұғымдар.
+</p>
+</div>
 
-    <div class="grid">
+<div class="grid">
 
-      <div class="card definition">
-        <h3 data-t="needsTitle">🏠 Негізгі қажеттіліктер — 55%</h3>
-        <p data-t="needsText">
-          Тұрғын үй, азық-түлік, коммуналдық төлемдер,
-          көлік, байланыс және несие сияқты міндетті шығындар.
-        </p>
-      </div>
+<div class="card definition">
+<h3 data-t="needsTitle">🏠 Негізгі қажеттіліктер — 55%</h3>
+<p data-t="needsText">
+Тұрғын үй, азық-түлік, коммуналдық төлемдер, көлік, байланыс және несие сияқты міндетті шығындар.
+</p>
+</div>
 
-      <div class="card definition">
-        <h3 data-t="freeTitle">☕ Еркін шығындар — 5%</h3>
-        <p data-t="freeText">
-          Кафе, ойын-сауық, хобби және өз қалауыңызға
-          жұмсалатын қаражат.
-        </p>
-      </div>
+<div class="card definition">
+<h3 data-t="freeTitle">☕ Еркін шығындар — 5%</h3>
+<p data-t="freeText">
+Кафе, ойын-сауық, хобби және өз қалауыңызға жұмсалатын қаражат.
+</p>
+</div>
 
-      <div class="card definition">
-        <h3 data-t="debtTitle">🤝 Қарыз / инвестиция — 10%</h3>
-        <p data-t="debtText">
-          Адамдарға қарызды қайтаруға немесе инвестиция жасауға
-          бөлінетін қаражат.
-        </p>
-      </div>
+<div class="card definition">
+<h3 data-t="debtTitle">🤝 Қарыз / инвестиция — 10%</h3>
+<p data-t="debtText">
+Адамдарға қарызды қайтаруға немесе инвестиция жасауға бөлінетін қаражат.
+</p>
+</div>
 
-      <div class="card definition">
-        <h3 data-t="shortTitle">🎯 Қысқа мерзімді мақсат — 15%</h3>
-        <p data-t="shortText">
-          Телефон, техника, саяхат, көлік немесе басқа
-          жақын мақсаттарға жиналатын ақша.
-        </p>
-      </div>
+<div class="card definition">
+<h3 data-t="shortTitle">🎯 Қысқа мерзімді мақсат — 15%</h3>
+<p data-t="shortText">
+Телефон, техника, саяхат, көлік немесе басқа жақын мақсаттарға жиналатын ақша.
+</p>
+</div>
 
-      <div class="card definition">
-        <h3 data-t="longTitle">🌱 Ұзақ мерзімді капитал — 15%</h3>
-        <p data-t="longText">
-          Болашаққа арналған жинақ, инвестиция және
-          қаржылық қауіпсіздік қоры.
-        </p>
-      </div>
+<div class="card definition">
+<h3 data-t="longTitle">🌱 Ұзақ мерзімді капитал — 15%</h3>
+<p data-t="longText">
+Болашаққа арналған жинақ, инвестиция және қаржылық қауіпсіздік қоры.
+</p>
+</div>
 
-    </div>
-  </div>
+</div>
+</div>
 </section>
 
 
 <section id="salary">
-  <div class="container">
+<div class="container">
 
-    <div class="section-title">
-      <h2 data-t="salary">Жалақыны бөлу</h2>
-      <p data-t="salarySub">
-        Айлық табысыңызды енгізіңіз. SMART MONEY оны автоматты түрде бөледі.
-      </p>
-    </div>
+<div class="section-title">
+<h2 data-t="salary">Жалақыны бөлу</h2>
+<p data-t="salarySub">
+Айлық табысыңызды енгізіңіз. SMART MONEY оны автоматты түрде бөледі.
+</p>
+</div>
 
-    <div class="calculator">
+<div class="calculator">
 
-      <label data-t="salaryLabel">Айлық жалақыңыз (₸)</label>
-      <input type="number" id="salaryInput" placeholder="Мысалы: 300000">
+<label data-t="salaryLabel">Айлық жалақыңыз (₸)</label>
+<input type="number" id="salaryInput" placeholder="Мысалы: 300000">
 
-      <br><br>
+<br><br>
 
-      <button class="primary" onclick="calculateSalary()" data-t="calculate">
-        Есептеу
-      </button>
+<button class="primary" onclick="calculateSalary()" data-t="calculate">
+Есептеу
+</button>
 
-      <div class="result" id="salaryResult">
+<div class="result" id="salaryResult">
 
-        <div class="salary-item">
-          <span data-t="needs">🏠 Негізгі қажеттіліктер (55%)</span>
-          <strong id="needsAmount"></strong>
-        </div>
+<div class="salary-item">
+<span data-t="needs">🏠 Негізгі қажеттіліктер (55%)</span>
+<strong id="needsAmount"></strong>
+</div>
 
-        <div class="salary-item">
-          <span data-t="free">☕ Еркін шығындар (5%)</span>
-          <strong id="freeAmount"></strong>
-        </div>
+<div class="salary-item">
+<span data-t="free">☕ Еркін шығындар (5%)</span>
+<strong id="freeAmount"></strong>
+</div>
 
-        <div class="salary-item">
-          <span data-t="debt">🤝 Қарыз / инвестиция (10%)</span>
-          <strong id="debtAmount"></strong>
-        </div>
+<div class="salary-item">
+<span data-t="debt">🤝 Қарыз / инвестиция (10%)</span>
+<strong id="debtAmount"></strong>
+</div>
 
-        <div class="salary-item">
-          <span data-t="short">🎯 Қысқа мерзімді мақсат (15%)</span>
-          <strong id="shortAmount"></strong>
-        </div>
+<div class="salary-item">
+<span data-t="short">🎯 Қысқа мерзімді мақсат (15%)</span>
+<strong id="shortAmount"></strong>
+</div>
 
-        <div class="salary-item">
-          <span data-t="long">🌱 Ұзақ мерзімді капитал (15%)</span>
-          <strong id="longAmount"></strong>
-        </div>
+<div class="salary-item">
+<span data-t="long">🌱 Ұзақ мерзімді капитал (15%)</span>
+<strong id="longAmount"></strong>
+</div>
 
-        <div class="advice" id="salaryAdvice"></div>
+<div class="advice" id="salaryAdvice"></div>
 
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
 </section>
 
 
 <section id="goal">
-  <div class="container">
+<div class="container">
 
-    <div class="section-title">
-      <h2 data-t="goal">Қанша айда жинай аламын?</h2>
-      <p data-t="goalSub">
-        Жалақыны бөлу бөліміндегі 15% қысқа мерзімді жинақ автоматты түрде қолданылады.
-      </p>
-    </div>
+<div class="section-title">
+<h2 data-t="goal">Қанша айда жинай аламын?</h2>
+<p data-t="goalSub">
+Жалақыны бөлу бөліміндегі 15% қысқа мерзімді жинақ автоматты түрде қолданылады.
+</p>
+</div>
 
-    <div class="calculator">
+<div class="calculator">
 
-      <label data-t="itemName">Не сатып алғыңыз келеді?</label>
-      <input id="goalName" type="text" placeholder="Мысалы: Ноутбук">
+<label data-t="itemName">Не сатып алғыңыз келеді?</label>
+<input id="goalName" type="text" placeholder="Мысалы: Ноутбук">
 
-      <label data-t="itemPrice">Бағасы (₸)</label>
-      <input id="goalPrice" type="number" placeholder="Мысалы: 450000">
+<label data-t="itemPrice">Бағасы (₸)</label>
+<input id="goalPrice" type="number" placeholder="Мысалы: 450000">
 
-      <br><br>
+<br><br>
 
-      <button class="primary" onclick="calculateGoal()" data-t="calculateGoal">
-        Мерзімді есептеу
-      </button>
+<button class="primary" onclick="calculateGoal()" data-t="calculateGoal">
+Мерзімді есептеу
+</button>
 
-      <div class="result" id="goalResult">
+<div class="result" id="goalResult">
 
-        <div class="goal-result">
-          <p data-t="youNeed">Сізге шамамен</p>
-          <div class="months" id="monthsResult"></div>
-          <p data-t="months">ай қажет</p>
-        </div>
+<div class="goal-result">
+<p data-t="youNeed">Сізге шамамен</p>
+<div class="months" id="monthsResult"></div>
+<p data-t="months">ай қажет</p>
+</div>
 
-        <div class="advice" id="goalAdvice"></div>
+<div class="advice" id="goalAdvice"></div>
 
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
 </section>
 
 
 <section id="impulse">
-  <div class="container">
+<div class="container">
 
-    <div class="section-title">
-      <h2 data-t="impulse">Импульсивті сатып алу</h2>
-      <p data-t="impulseSub">
-        Сатып алу шешіміңіз қаншалықты жоспарланғанын тексеріңіз.
-      </p>
-    </div>
+<div class="section-title">
+<h2 data-t="impulse">Импульсивті сатып алу</h2>
+<p data-t="impulseSub">
+Сатып алу шешіміңіз қаншалықты жоспарланғанын тексеріңіз.
+</p>
+</div>
 
-    <div class="calculator">
+<div class="calculator">
 
-      <label data-t="productName">Тауар атауы</label>
-      <input id="productName" type="text" placeholder="Мысалы: Құлаққап">
+<label data-t="productName">Тауар атауы</label>
+<input id="productName" type="text" placeholder="Мысалы: Құлаққап">
 
-      <label data-t="productPrice">Тауар бағасы (₸)</label>
-      <input id="productPrice" type="number" placeholder="Мысалы: 50000">
-
-
-      <div class="question">
-        <p data-t="q1">1. Бұл затты сатып алуды алдын ала жоспарладыңыз ба?</p>
-
-        <label>
-          <input type="radio" name="q1" value="0">
-          <span data-t="yes">Иә</span>
-        </label>
-
-        <label>
-          <input type="radio" name="q1" value="2">
-          <span data-t="no">Жоқ</span>
-        </label>
-      </div>
+<label data-t="productPrice">Тауар бағасы (₸)</label>
+<input id="productPrice" type="number" placeholder="Мысалы: 50000">
 
 
-      <div class="question">
-        <p data-t="q2">2. Сатып алмас бұрын кемінде 24 сағат ойландыңыз ба?</p>
+<div class="question">
+<p data-t="q1">1. Бұл затты сатып алуды алдын ала жоспарладыңыз ба?</p>
 
-        <label>
-          <input type="radio" name="q2" value="0">
-          <span data-t="yes">Иә</span>
-        </label>
+<label>
+<input type="radio" name="q1" value="0">
+<span data-t="yes">Иә</span>
+</label>
 
-        <label>
-          <input type="radio" name="q2" value="2">
-          <span data-t="no">Жоқ</span>
-        </label>
-      </div>
-
-
-      <div class="question">
-        <p data-t="q3">3. Бұл зат сізге шынымен қажет пе?</p>
-
-        <label>
-          <input type="radio" name="q3" value="0">
-          <span data-t="yes">Иә</span>
-        </label>
-
-        <label>
-          <input type="radio" name="q3" value="2">
-          <span data-t="no">Жоқ</span>
-        </label>
-      </div>
+<label>
+<input type="radio" name="q1" value="2">
+<span data-t="no">Жоқ</span>
+</label>
+</div>
 
 
-      <div class="question">
-        <p data-t="q4">4. Жеңілдік болмаса да бұл затты сатып алар ма едіңіз?</p>
+<div class="question">
+<p data-t="q2">2. Сатып алмас бұрын кемінде 24 сағат ойландыңыз ба?</p>
 
-        <label>
-          <input type="radio" name="q4" value="0">
-          <span data-t="yes">Иә</span>
-        </label>
+<label>
+<input type="radio" name="q2" value="0">
+<span data-t="yes">Иә</span>
+</label>
 
-        <label>
-          <input type="radio" name="q4" value="2">
-          <span data-t="no">Жоқ</span>
-        </label>
-      </div>
+<label>
+<input type="radio" name="q2" value="2">
+<span data-t="no">Жоқ</span>
+</label>
+</div>
 
 
-      <div class="question">
-        <p data-t="q5">5. Бұл сатып алу негізгі бюджетіңізге кері әсер ете ме?</p>
+<div class="question">
+<p data-t="q3">3. Бұл зат сізге шынымен қажет пе?</p>
 
-        <label>
-          <input type="radio" name="q5" value="2">
-          <span data-t="yes">Иә</span>
-        </label>
+<label>
+<input type="radio" name="q3" value="0">
+<span data-t="yes">Иә</span>
+</label>
 
-        <label>
-          <input type="radio" name="q5" value="0">
-          <span data-t="no">Жоқ</span>
-        </label>
-      </div>
+<label>
+<input type="radio" name="q3" value="2">
+<span data-t="no">Жоқ</span>
+</label>
+</div>
 
-      <br>
 
-      <button class="primary" onclick="checkImpulse()" data-t="testResult">
-        Нәтижені анықтау
-      </button>
+<div class="question">
+<p data-t="q4">4. Жеңілдік болмаса да бұл затты сатып алар ма едіңіз?</p>
 
-      <div class="result" id="impulseResult">
-        <div class="advice">
-          <h3 id="impulseTitle"></h3>
-          <p id="impulseAdvice"></p>
-        </div>
-      </div>
+<label>
+<input type="radio" name="q4" value="0">
+<span data-t="yes">Иә</span>
+</label>
 
-    </div>
-  </div>
+<label>
+<input type="radio" name="q4" value="2">
+<span data-t="no">Жоқ</span>
+</label>
+</div>
+
+
+<div class="question">
+<p data-t="q5">5. Бұл сатып алу негізгі бюджетіңізге кері әсер ете ме?</p>
+
+<label>
+<input type="radio" name="q5" value="2">
+<span data-t="yes">Иә</span>
+</label>
+
+<label>
+<input type="radio" name="q5" value="0">
+<span data-t="no">Жоқ</span>
+</label>
+</div>
+
+<br>
+
+<button class="primary" onclick="checkImpulse()" data-t="testResult">
+Нәтижені анықтау
+</button>
+
+<div class="result" id="impulseResult">
+<div class="advice">
+<h3 id="impulseTitle"></h3>
+<p id="impulseAdvice"></p>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
 
 <footer>
-  <strong>SMART MONEY</strong>
-  <p data-t="footer">Ақшаны басқару — болашақты басқару.</p>
+<strong>SMART MONEY</strong>
+<p data-t="footer">Ақшаны басқару — болашақты басқару.</p>
 </footer>
+
+
+<!-- ТІРКЕЛУ / КІРУ -->
+
+<div class="auth-overlay" id="authOverlay">
+
+<div class="auth-card">
+
+<button class="close-auth" id="closeAuth">×</button>
+
+<div id="authForms">
+
+<div id="loginBox">
+
+<h2 data-t="loginTitle">Кіру</h2>
+
+<p class="auth-subtitle" data-t="loginSubtitle">
+SMART MONEY аккаунтыңызға кіріңіз
+</p>
+
+<label>Email</label>
+<input type="email" id="loginEmail" placeholder="example@gmail.com">
+
+<label data-t="password">Құпия сөз</label>
+<input type="password" id="loginPassword" placeholder="••••••••">
+
+<br><br>
+
+<button class="primary" id="loginButton" style="width:100%" data-t="login">
+Кіру
+</button>
+
+<p class="auth-switch">
+<span data-t="noAccount">Аккаунтыңыз жоқ па?</span>
+<button class="auth-link" id="showRegister" data-t="register">
+Тіркелу
+</button>
+</p>
+
+</div>
+
+
+<div id="registerBox" style="display:none">
+
+<h2 data-t="registerTitle">Тіркелу</h2>
+
+<p class="auth-subtitle" data-t="registerSubtitle">
+Жаңа SMART MONEY аккаунтын ашыңыз
+</p>
+
+<label data-t="name">Аты-жөніңіз</label>
+<input type="text" id="registerName" placeholder="Атыңыз">
+
+<label>Email</label>
+<input type="email" id="registerEmail" placeholder="example@gmail.com">
+
+<label data-t="password">Құпия сөз</label>
+<input type="password" id="registerPassword" placeholder="Кемінде 6 таңба">
+
+<br><br>
+
+<button class="primary" id="registerButton" style="width:100%" data-t="register">
+Тіркелу
+</button>
+
+<p class="auth-switch">
+<span data-t="haveAccount">Аккаунтыңыз бар ма?</span>
+<button class="auth-link" id="showLogin" data-t="login">
+Кіру
+</button>
+</p>
+
+</div>
+
+</div>
+
+
+<div id="userBox" class="user-box">
+
+<h3 id="userName"></h3>
+<p id="userEmail"></p>
+
+<button id="logoutButton" class="logout" data-t="logout">
+Шығу
+</button>
+
+</div>
+
+<div id="authMessage" class="auth-message"></div>
+
+</div>
+</div>
 
 
 <script>
@@ -698,7 +902,7 @@ let freeMoney = 0;
 let currentSalary = 0;
 
 
-/* ---------------- NAVIGATION ---------------- */
+/* NAVIGATION */
 
 function goTo(id){
   document.getElementById(id).scrollIntoView({
@@ -707,7 +911,7 @@ function goTo(id){
 }
 
 
-/* ---------------- MONEY FORMAT ---------------- */
+/* MONEY */
 
 function money(number){
   return new Intl.NumberFormat("kk-KZ").format(
@@ -716,7 +920,7 @@ function money(number){
 }
 
 
-/* ---------------- SALARY ---------------- */
+/* SALARY */
 
 function calculateSalary(){
 
@@ -725,11 +929,13 @@ function calculateSalary(){
   );
 
   if(!salary || salary <= 0){
+
     alert(
       currentLanguage === "kk" ? "Жалақыңызды енгізіңіз." :
       currentLanguage === "ru" ? "Введите зарплату." :
       "Enter your salary."
     );
+
     return;
   }
 
@@ -751,6 +957,7 @@ function calculateSalary(){
   document.getElementById("longAmount").textContent = money(longGoal);
 
   const advice = {
+
     kk:
     "💡 Кеңес: қысқа мерзімді мақсатқа ай сайын " +
     money(shortGoal) +
@@ -773,12 +980,16 @@ function calculateSalary(){
   document.getElementById("salaryResult")
     .classList.add("active");
 
-  /* Деректер браузерде сақталады */
   localStorage.setItem("smartMoneySalary", salary);
+
+  /* Егер аккаунтқа кірген болса, Firebase-ке де сақтайды */
+  if(window.saveSalaryToFirebase){
+    window.saveSalaryToFirebase(salary);
+  }
 }
 
 
-/* ---------------- GOAL ---------------- */
+/* GOAL */
 
 function calculateGoal(){
 
@@ -815,13 +1026,11 @@ function calculateGoal(){
     return;
   }
 
-  const months = Math.ceil(
-    price / monthlyGoalSaving
-  );
+  const months =
+    Math.ceil(price / monthlyGoalSaving);
 
   document.getElementById("monthsResult").textContent =
     months;
-
 
   let advice = "";
 
@@ -857,7 +1066,7 @@ function calculateGoal(){
       }
     }
 
-  } else if(currentLanguage === "ru"){
+  }else if(currentLanguage === "ru"){
 
     advice =
       "🎯 Если откладывать " +
@@ -868,7 +1077,7 @@ function calculateGoal(){
       months +
       " мес.";
 
-  } else {
+  }else{
 
     advice =
       "🎯 Saving " +
@@ -878,16 +1087,19 @@ function calculateGoal(){
       " months to reach this goal.";
   }
 
-
-  document.getElementById("goalAdvice")
-    .textContent = advice;
+  document.getElementById("goalAdvice").textContent =
+    advice;
 
   document.getElementById("goalResult")
     .classList.add("active");
+
+  if(window.saveGoalToFirebase){
+    window.saveGoalToFirebase(name,price,months);
+  }
 }
 
 
-/* ---------------- IMPULSE TEST ---------------- */
+/* IMPULSE */
 
 function checkImpulse(){
 
@@ -918,17 +1130,39 @@ function checkImpulse(){
     score += Number(selected.value);
   }
 
+  const productName =
+    document.getElementById("productName").value.trim();
 
   const price =
     Number(
       document.getElementById("productPrice").value
     ) || 0;
 
+  if(!productName){
 
-  /*
-     Егер тауар еркін шығын бюджетінің
-     көлемінен жоғары болса, тәуекел өседі.
-  */
+    alert(
+      currentLanguage === "kk"
+      ? "Тауар атауын енгізіңіз."
+      : currentLanguage === "ru"
+      ? "Введите название товара."
+      : "Enter the product name."
+    );
+
+    return;
+  }
+
+  if(!price || price <= 0){
+
+    alert(
+      currentLanguage === "kk"
+      ? "Тауар бағасын енгізіңіз."
+      : currentLanguage === "ru"
+      ? "Введите стоимость товара."
+      : "Enter the product price."
+    );
+
+    return;
+  }
 
   if(
     freeMoney > 0 &&
@@ -937,10 +1171,8 @@ function checkImpulse(){
     score += 1;
   }
 
-
   let title = "";
   let advice = "";
-
 
   if(score >= 7){
 
@@ -952,7 +1184,7 @@ function checkImpulse(){
       advice =
         "Сатып алуға асықпаңыз. 48 сағат күтіп, осы заттың шынымен қажет екенін қайта бағалаңыз. Бағасын басқа дүкендермен салыстырып, оның бюджетіңізге әсерін тексеріңіз.";
 
-    } else if(currentLanguage === "ru"){
+    }else if(currentLanguage === "ru"){
 
       title =
         "🔴 Высокая вероятность импульсивной покупки";
@@ -960,7 +1192,7 @@ function checkImpulse(){
       advice =
         "Не спешите с покупкой. Подождите 48 часов и ещё раз оцените необходимость товара.";
 
-    } else {
+    }else{
 
       title =
         "🔴 High probability of an impulse purchase";
@@ -969,9 +1201,7 @@ function checkImpulse(){
         "Wait 48 hours before buying and reconsider whether you really need the item.";
     }
 
-  }
-
-  else if(score >= 4){
+  }else if(score >= 4){
 
     if(currentLanguage === "kk"){
 
@@ -981,7 +1211,7 @@ function checkImpulse(){
       advice =
         "Сатып алмас бұрын бағаны салыстырып, бұл затты бірнеше күннен кейін де қалайтыныңызды тексеріңіз.";
 
-    } else if(currentLanguage === "ru"){
+    }else if(currentLanguage === "ru"){
 
       title =
         "🟡 Средняя вероятность импульсивной покупки";
@@ -989,7 +1219,7 @@ function checkImpulse(){
       advice =
         "Сравните цены и подумайте о покупке ещё некоторое время.";
 
-    } else {
+    }else{
 
       title =
         "🟡 Moderate impulse-purchase risk";
@@ -998,9 +1228,7 @@ function checkImpulse(){
         "Compare prices and give yourself more time before purchasing.";
     }
 
-  }
-
-  else{
+  }else{
 
     if(currentLanguage === "kk"){
 
@@ -1010,7 +1238,7 @@ function checkImpulse(){
       advice =
         "Сіз сатып алуды ойланып жоспарлаған сияқтысыз. Дегенмен оның негізгі қажеттіліктер мен жинақ жоспарына кедергі келтірмейтініне көз жеткізіңіз.";
 
-    } else if(currentLanguage === "ru"){
+    }else if(currentLanguage === "ru"){
 
       title =
         "🟢 Покупка выглядит запланированной";
@@ -1018,7 +1246,7 @@ function checkImpulse(){
       advice =
         "Убедитесь, что покупка не мешает обязательным расходам и накоплениям.";
 
-    } else {
+    }else{
 
       title =
         "🟢 This looks like a planned purchase";
@@ -1028,7 +1256,6 @@ function checkImpulse(){
     }
   }
 
-
   document.getElementById("impulseTitle")
     .textContent = title;
 
@@ -1037,206 +1264,254 @@ function checkImpulse(){
 
   document.getElementById("impulseResult")
     .classList.add("active");
+
+  if(window.saveImpulseToFirebase){
+    window.saveImpulseToFirebase(
+      productName,
+      price,
+      score,
+      title
+    );
+  }
 }
 
 
-/* ---------------- LANGUAGES ---------------- */
+/* LANGUAGES */
 
 const translations = {
 
 kk:{
-home:"Басты бет",
-definitions:"Анықтамалар",
-salary:"Жалақыны бөлу",
-goal:"Қанша айда жинай аламын?",
-impulse:"Импульсивті сатып алу",
+  home:"Басты бет",
+  definitions:"Анықтамалар",
+  salary:"Жалақыны бөлу",
+  goal:"Қанша айда жинай аламын?",
+  impulse:"Импульсивті сатып алу",
 
-badge:"Ақшаңды ақылмен басқар",
-heroText:"Қаржыңды жоспарла, мақсатыңа жет және импульсивті сатып алуларды азайт.",
-start:"Бастау",
+  login:"Кіру",
+  register:"Тіркелу",
+  logout:"Шығу",
 
-principle:"Қарапайым қағида",
-principleText:"Жалақыны мақсаттарға бөліп, әр теңгеге міндет бер.",
+  loginTitle:"Кіру",
+  loginSubtitle:"SMART MONEY аккаунтыңызға кіріңіз",
+  registerTitle:"Тіркелу",
+  registerSubtitle:"Жаңа SMART MONEY аккаунтын ашыңыз",
+  password:"Құпия сөз",
+  name:"Аты-жөніңіз",
+  noAccount:"Аккаунтыңыз жоқ па?",
+  haveAccount:"Аккаунтыңыз бар ма?",
 
-definitionsSub:"Қаржыны жоспарлауда қолданылатын негізгі ұғымдар.",
+  badge:"Ақшаңды ақылмен басқар",
+  heroText:"Қаржыңды жоспарла, мақсатыңа жет және импульсивті сатып алуларды азайт.",
+  start:"Бастау",
 
-needsTitle:"🏠 Негізгі қажеттіліктер — 55%",
-needsText:"Тұрғын үй, азық-түлік, коммуналдық төлемдер, көлік, байланыс және несие сияқты міндетті шығындар.",
+  principle:"Қарапайым қағида",
+  principleText:"Жалақыны мақсаттарға бөліп, әр теңгеге міндет бер.",
 
-freeTitle:"☕ Еркін шығындар — 5%",
-freeText:"Кафе, ойын-сауық, хобби және өз қалауыңызға жұмсалатын қаражат.",
+  definitionsSub:"Қаржыны жоспарлауда қолданылатын негізгі ұғымдар.",
 
-debtTitle:"🤝 Қарыз / инвестиция — 10%",
-debtText:"Адамдарға қарызды қайтаруға немесе инвестиция жасауға бөлінетін қаражат.",
+  needsTitle:"🏠 Негізгі қажеттіліктер — 55%",
+  needsText:"Тұрғын үй, азық-түлік, коммуналдық төлемдер, көлік, байланыс және несие сияқты міндетті шығындар.",
 
-shortTitle:"🎯 Қысқа мерзімді мақсат — 15%",
-shortText:"Телефон, техника, саяхат, көлік немесе басқа жақын мақсаттарға жиналатын ақша.",
+  freeTitle:"☕ Еркін шығындар — 5%",
+  freeText:"Кафе, ойын-сауық, хобби және өз қалауыңызға жұмсалатын қаражат.",
 
-longTitle:"🌱 Ұзақ мерзімді капитал — 15%",
-longText:"Болашаққа арналған жинақ, инвестиция және қаржылық қауіпсіздік қоры.",
+  debtTitle:"🤝 Қарыз / инвестиция — 10%",
+  debtText:"Адамдарға қарызды қайтаруға немесе инвестиция жасауға бөлінетін қаражат.",
 
-salarySub:"Айлық табысыңызды енгізіңіз. SMART MONEY оны автоматты түрде бөледі.",
-salaryLabel:"Айлық жалақыңыз (₸)",
-calculate:"Есептеу",
+  shortTitle:"🎯 Қысқа мерзімді мақсат — 15%",
+  shortText:"Телефон, техника, саяхат, көлік немесе басқа жақын мақсаттарға жиналатын ақша.",
 
-needs:"🏠 Негізгі қажеттіліктер (55%)",
-free:"☕ Еркін шығындар (5%)",
-debt:"🤝 Қарыз / инвестиция (10%)",
-short:"🎯 Қысқа мерзімді мақсат (15%)",
-long:"🌱 Ұзақ мерзімді капитал (15%)",
+  longTitle:"🌱 Ұзақ мерзімді капитал — 15%",
+  longText:"Болашаққа арналған жинақ, инвестиция және қаржылық қауіпсіздік қоры.",
 
-goalSub:"Жалақыны бөлу бөліміндегі 15% қысқа мерзімді жинақ автоматты түрде қолданылады.",
-itemName:"Не сатып алғыңыз келеді?",
-itemPrice:"Бағасы (₸)",
-calculateGoal:"Мерзімді есептеу",
-youNeed:"Сізге шамамен",
-months:"ай қажет",
+  salarySub:"Айлық табысыңызды енгізіңіз. SMART MONEY оны автоматты түрде бөледі.",
+  salaryLabel:"Айлық жалақыңыз (₸)",
+  calculate:"Есептеу",
 
-impulseSub:"Сатып алу шешіміңіз қаншалықты жоспарланғанын тексеріңіз.",
-productName:"Тауар атауы",
-productPrice:"Тауар бағасы (₸)",
+  needs:"🏠 Негізгі қажеттіліктер (55%)",
+  free:"☕ Еркін шығындар (5%)",
+  debt:"🤝 Қарыз / инвестиция (10%)",
+  short:"🎯 Қысқа мерзімді мақсат (15%)",
+  long:"🌱 Ұзақ мерзімді капитал (15%)",
 
-q1:"1. Бұл затты сатып алуды алдын ала жоспарладыңыз ба?",
-q2:"2. Сатып алмас бұрын кемінде 24 сағат ойландыңыз ба?",
-q3:"3. Бұл зат сізге шынымен қажет пе?",
-q4:"4. Жеңілдік болмаса да бұл затты сатып алар ма едіңіз?",
-q5:"5. Бұл сатып алу негізгі бюджетіңізге кері әсер ете ме?",
+  goalSub:"Жалақыны бөлу бөліміндегі 15% қысқа мерзімді жинақ автоматты түрде қолданылады.",
+  itemName:"Не сатып алғыңыз келеді?",
+  itemPrice:"Бағасы (₸)",
+  calculateGoal:"Мерзімді есептеу",
+  youNeed:"Сізге шамамен",
+  months:"ай қажет",
 
-yes:"Иә",
-no:"Жоқ",
-testResult:"Нәтижені анықтау",
+  impulseSub:"Сатып алу шешіміңіз қаншалықты жоспарланғанын тексеріңіз.",
+  productName:"Тауар атауы",
+  productPrice:"Тауар бағасы (₸)",
 
-footer:"Ақшаны басқару — болашақты басқару."
+  q1:"1. Бұл затты сатып алуды алдын ала жоспарладыңыз ба?",
+  q2:"2. Сатып алмас бұрын кемінде 24 сағат ойландыңыз ба?",
+  q3:"3. Бұл зат сізге шынымен қажет пе?",
+  q4:"4. Жеңілдік болмаса да бұл затты сатып алар ма едіңіз?",
+  q5:"5. Бұл сатып алу негізгі бюджетіңізге кері әсер ете ме?",
+
+  yes:"Иә",
+  no:"Жоқ",
+  testResult:"Нәтижені анықтау",
+
+  footer:"Ақшаны басқару — болашақты басқару."
 },
 
 ru:{
-home:"Главная",
-definitions:"Определения",
-salary:"Распределение зарплаты",
-goal:"За сколько месяцев накоплю?",
-impulse:"Импульсивная покупка",
+  home:"Главная",
+  definitions:"Определения",
+  salary:"Распределение зарплаты",
+  goal:"За сколько месяцев накоплю?",
+  impulse:"Импульсивная покупка",
 
-badge:"Управляй деньгами разумно",
-heroText:"Планируй финансы, достигай целей и сокращай импульсивные покупки.",
-start:"Начать",
+  login:"Войти",
+  register:"Регистрация",
+  logout:"Выйти",
 
-principle:"Простой принцип",
-principleText:"Распредели зарплату по целям и дай каждому тенге задачу.",
+  loginTitle:"Вход",
+  loginSubtitle:"Войдите в свой аккаунт SMART MONEY",
+  registerTitle:"Регистрация",
+  registerSubtitle:"Создайте новый аккаунт SMART MONEY",
+  password:"Пароль",
+  name:"Имя",
+  noAccount:"Нет аккаунта?",
+  haveAccount:"Уже есть аккаунт?",
 
-definitionsSub:"Основные понятия для планирования личных финансов.",
+  badge:"Управляй деньгами разумно",
+  heroText:"Планируй финансы, достигай целей и сокращай импульсивные покупки.",
+  start:"Начать",
 
-needsTitle:"🏠 Основные потребности — 55%",
-needsText:"Жильё, продукты, коммунальные услуги, транспорт, связь и обязательные платежи.",
+  principle:"Простой принцип",
+  principleText:"Распредели зарплату по целям и дай каждому тенге задачу.",
 
-freeTitle:"☕ Свободные расходы — 5%",
-freeText:"Кафе, развлечения, хобби и другие необязательные покупки.",
+  definitionsSub:"Основные понятия для планирования личных финансов.",
 
-debtTitle:"🤝 Долги / инвестиции — 10%",
-debtText:"Возврат долгов людям или средства для инвестирования.",
+  needsTitle:"🏠 Основные потребности — 55%",
+  needsText:"Жильё, продукты, коммунальные услуги, транспорт, связь и обязательные платежи.",
 
-shortTitle:"🎯 Краткосрочные цели — 15%",
-shortText:"Телефон, техника, путешествие, автомобиль и другие ближайшие цели.",
+  freeTitle:"☕ Свободные расходы — 5%",
+  freeText:"Кафе, развлечения, хобби и другие необязательные покупки.",
 
-longTitle:"🌱 Долгосрочный капитал — 15%",
-longText:"Накопления, инвестиции и финансовая подушка на будущее.",
+  debtTitle:"🤝 Долги / инвестиции — 10%",
+  debtText:"Возврат долгов людям или средства для инвестирования.",
 
-salarySub:"Введите ежемесячный доход, и SMART MONEY автоматически его распределит.",
-salaryLabel:"Ежемесячная зарплата (₸)",
-calculate:"Рассчитать",
+  shortTitle:"🎯 Краткосрочные цели — 15%",
+  shortText:"Телефон, техника, путешествие, автомобиль и другие ближайшие цели.",
 
-needs:"🏠 Основные потребности (55%)",
-free:"☕ Свободные расходы (5%)",
-debt:"🤝 Долги / инвестиции (10%)",
-short:"🎯 Краткосрочные цели (15%)",
-long:"🌱 Долгосрочный капитал (15%)",
+  longTitle:"🌱 Долгосрочный капитал — 15%",
+  longText:"Накопления, инвестиции и финансовая подушка на будущее.",
 
-goalSub:"Используются 15%, рассчитанные в разделе распределения зарплаты.",
-itemName:"Что вы хотите купить?",
-itemPrice:"Стоимость (₸)",
-calculateGoal:"Рассчитать срок",
-youNeed:"Вам потребуется примерно",
-months:"месяцев",
+  salarySub:"Введите ежемесячный доход, и SMART MONEY автоматически его распределит.",
+  salaryLabel:"Ежемесячная зарплата (₸)",
+  calculate:"Рассчитать",
 
-impulseSub:"Проверьте, насколько запланировано ваше решение о покупке.",
-productName:"Название товара",
-productPrice:"Стоимость товара (₸)",
+  needs:"🏠 Основные потребности (55%)",
+  free:"☕ Свободные расходы (5%)",
+  debt:"🤝 Долги / инвестиции (10%)",
+  short:"🎯 Краткосрочные цели (15%)",
+  long:"🌱 Долгосрочный капитал (15%)",
 
-q1:"1. Вы заранее планировали эту покупку?",
-q2:"2. Вы думали о покупке не менее 24 часов?",
-q3:"3. Этот товар действительно вам нужен?",
-q4:"4. Вы купили бы этот товар без скидки?",
-q5:"5. Покупка негативно повлияет на основной бюджет?",
+  goalSub:"Используются 15%, рассчитанные в разделе распределения зарплаты.",
+  itemName:"Что вы хотите купить?",
+  itemPrice:"Стоимость (₸)",
+  calculateGoal:"Рассчитать срок",
+  youNeed:"Вам потребуется примерно",
+  months:"месяцев",
 
-yes:"Да",
-no:"Нет",
-testResult:"Получить результат",
+  impulseSub:"Проверьте, насколько запланировано ваше решение о покупке.",
+  productName:"Название товара",
+  productPrice:"Стоимость товара (₸)",
 
-footer:"Управлять деньгами — управлять будущим."
+  q1:"1. Вы заранее планировали эту покупку?",
+  q2:"2. Вы думали о покупке не менее 24 часов?",
+  q3:"3. Этот товар действительно вам нужен?",
+  q4:"4. Вы купили бы этот товар без скидки?",
+  q5:"5. Покупка негативно повлияет на основной бюджет?",
+
+  yes:"Да",
+  no:"Нет",
+  testResult:"Получить результат",
+
+  footer:"Управлять деньгами — управлять будущим."
 },
 
 en:{
-home:"Home",
-definitions:"Definitions",
-salary:"Salary allocation",
-goal:"How long to save?",
-impulse:"Impulse purchase",
+  home:"Home",
+  definitions:"Definitions",
+  salary:"Salary allocation",
+  goal:"How long to save?",
+  impulse:"Impulse purchase",
 
-badge:"Manage your money wisely",
-heroText:"Plan your finances, reach your goals and reduce impulse purchases.",
-start:"Start",
+  login:"Login",
+  register:"Register",
+  logout:"Logout",
 
-principle:"Simple principle",
-principleText:"Allocate your salary and give every tenge a purpose.",
+  loginTitle:"Login",
+  loginSubtitle:"Sign in to your SMART MONEY account",
+  registerTitle:"Register",
+  registerSubtitle:"Create a new SMART MONEY account",
+  password:"Password",
+  name:"Name",
+  noAccount:"Don't have an account?",
+  haveAccount:"Already have an account?",
 
-definitionsSub:"Key concepts for personal financial planning.",
+  badge:"Manage your money wisely",
+  heroText:"Plan your finances, reach your goals and reduce impulse purchases.",
+  start:"Start",
 
-needsTitle:"🏠 Essential needs — 55%",
-needsText:"Housing, food, utilities, transportation, communication and required payments.",
+  principle:"Simple principle",
+  principleText:"Allocate your salary and give every tenge a purpose.",
 
-freeTitle:"☕ Free spending — 5%",
-freeText:"Cafes, entertainment, hobbies and optional personal spending.",
+  definitionsSub:"Key concepts for personal financial planning.",
 
-debtTitle:"🤝 Debt / investment — 10%",
-debtText:"Money for repaying personal debts or investing.",
+  needsTitle:"🏠 Essential needs — 55%",
+  needsText:"Housing, food, utilities, transportation, communication and required payments.",
 
-shortTitle:"🎯 Short-term goals — 15%",
-shortText:"Phone, electronics, travel, car and other near-term goals.",
+  freeTitle:"☕ Free spending — 5%",
+  freeText:"Cafes, entertainment, hobbies and optional personal spending.",
 
-longTitle:"🌱 Long-term wealth — 15%",
-longText:"Long-term savings, investments and financial security.",
+  debtTitle:"🤝 Debt / investment — 10%",
+  debtText:"Money for repaying personal debts or investing.",
 
-salarySub:"Enter your monthly income and SMART MONEY will allocate it automatically.",
-salaryLabel:"Monthly salary (₸)",
-calculate:"Calculate",
+  shortTitle:"🎯 Short-term goals — 15%",
+  shortText:"Phone, electronics, travel, car and other near-term goals.",
 
-needs:"🏠 Essential needs (55%)",
-free:"☕ Free spending (5%)",
-debt:"🤝 Debt / investment (10%)",
-short:"🎯 Short-term goals (15%)",
-long:"🌱 Long-term wealth (15%)",
+  longTitle:"🌱 Long-term wealth — 15%",
+  longText:"Long-term savings, investments and financial security.",
 
-goalSub:"The calculator automatically uses the 15% short-term savings amount.",
-itemName:"What do you want to buy?",
-itemPrice:"Price (₸)",
-calculateGoal:"Calculate time",
-youNeed:"You need approximately",
-months:"months",
+  salarySub:"Enter your monthly income and SMART MONEY will allocate it automatically.",
+  salaryLabel:"Monthly salary (₸)",
+  calculate:"Calculate",
 
-impulseSub:"Check how planned your purchase decision is.",
-productName:"Product name",
-productPrice:"Product price (₸)",
+  needs:"🏠 Essential needs (55%)",
+  free:"☕ Free spending (5%)",
+  debt:"🤝 Debt / investment (10%)",
+  short:"🎯 Short-term goals (15%)",
+  long:"🌱 Long-term wealth (15%)",
 
-q1:"1. Did you plan this purchase in advance?",
-q2:"2. Did you wait at least 24 hours before buying?",
-q3:"3. Do you really need this item?",
-q4:"4. Would you buy it without a discount?",
-q5:"5. Will this purchase negatively affect your main budget?",
+  goalSub:"The calculator automatically uses the 15% short-term savings amount.",
+  itemName:"What do you want to buy?",
+  itemPrice:"Price (₸)",
+  calculateGoal:"Calculate time",
+  youNeed:"You need approximately",
+  months:"months",
 
-yes:"Yes",
-no:"No",
-testResult:"See result",
+  impulseSub:"Check how planned your purchase decision is.",
+  productName:"Product name",
+  productPrice:"Product price (₸)",
 
-footer:"Managing money means managing your future."
+  q1:"1. Did you plan this purchase in advance?",
+  q2:"2. Did you wait at least 24 hours before buying?",
+  q3:"3. Do you really need this item?",
+  q4:"4. Would you buy it without a discount?",
+  q5:"5. Will this purchase negatively affect your main budget?",
+
+  yes:"Yes",
+  no:"No",
+  testResult:"See result",
+
+  footer:"Managing money means managing your future."
 }
 
 };
@@ -1260,16 +1535,19 @@ function setLanguage(lang){
 
     });
 
-
   document.querySelectorAll(".language button")
     .forEach(btn => btn.classList.remove("active"));
 
   document.getElementById(lang + "Btn")
     .classList.add("active");
+
+  if(window.updateAccountButton){
+    window.updateAccountButton();
+  }
 }
 
 
-/* ---------------- LOAD SAVED SALARY ---------------- */
+/* LOAD LOCAL SALARY */
 
 window.addEventListener("load", ()=>{
 
@@ -1287,24 +1565,585 @@ window.addEventListener("load", ()=>{
 });
 
 </script>
+
+
+<!-- FIREBASE -->
+
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyB-h5kCLhghjyUwluN-esZJ-ZLGS_xmfrU",
-    authDomain: "smart-money-11c81.firebaseapp.com",
-    projectId: "smart-money-11c81",
-    storageBucket: "smart-money-11c81.firebasestorage.app",
-    messagingSenderId: "691860775274",
-    appId: "1:691860775274:web:b061b5fb5b339f57278513"
-  };
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  updateProfile
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyB-h5kCLhghjyUwluN-esZJ-ZLGS_xmfrU",
+
+  authDomain:
+    "smart-money-11c81.firebaseapp.com",
+
+  projectId:
+    "smart-money-11c81",
+
+  storageBucket:
+    "smart-money-11c81.firebasestorage.app",
+
+  messagingSenderId:
+    "691860775274",
+
+  appId:
+    "1:691860775274:web:b061b5fb5b339f57278513"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+const overlay =
+  document.getElementById("authOverlay");
+
+const accountButton =
+  document.getElementById("accountButton");
+
+const loginBox =
+  document.getElementById("loginBox");
+
+const registerBox =
+  document.getElementById("registerBox");
+
+const authForms =
+  document.getElementById("authForms");
+
+const userBox =
+  document.getElementById("userBox");
+
+const message =
+  document.getElementById("authMessage");
+
+
+function openAuth(){
+
+  message.textContent = "";
+
+  overlay.classList.add("active");
+}
+
+
+function closeAuth(){
+
+  overlay.classList.remove("active");
+}
+
+
+document.getElementById("closeAuth")
+.addEventListener("click",closeAuth);
+
+
+overlay.addEventListener("click",(event)=>{
+
+  if(event.target === overlay){
+    closeAuth();
+  }
+
+});
+
+
+accountButton.addEventListener("click",()=>{
+
+  openAuth();
+
+});
+
+
+document.getElementById("showRegister")
+.addEventListener("click",()=>{
+
+  loginBox.style.display = "none";
+  registerBox.style.display = "block";
+  message.textContent = "";
+
+});
+
+
+document.getElementById("showLogin")
+.addEventListener("click",()=>{
+
+  registerBox.style.display = "none";
+  loginBox.style.display = "block";
+  message.textContent = "";
+
+});
+
+
+/* REGISTER */
+
+document.getElementById("registerButton")
+.addEventListener("click",async ()=>{
+
+  const name =
+    document.getElementById("registerName")
+      .value.trim();
+
+  const email =
+    document.getElementById("registerEmail")
+      .value.trim();
+
+  const password =
+    document.getElementById("registerPassword")
+      .value;
+
+  if(!name || !email || !password){
+
+    message.style.color = "#b85b52";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "Барлық жолды толтырыңыз."
+      : currentLanguage === "ru"
+      ? "Заполните все поля."
+      : "Fill in all fields.";
+
+    return;
+  }
+
+  if(password.length < 6){
+
+    message.style.color = "#b85b52";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "Құпия сөз кемінде 6 таңбадан тұруы керек."
+      : currentLanguage === "ru"
+      ? "Пароль должен содержать минимум 6 символов."
+      : "Password must contain at least 6 characters.";
+
+    return;
+  }
+
+  try{
+
+    message.style.color = "#66734f";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "Тіркелуде..."
+      : currentLanguage === "ru"
+      ? "Регистрация..."
+      : "Registering...";
+
+    const credential =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    await updateProfile(
+      credential.user,
+      {
+        displayName:name
+      }
+    );
+
+    await setDoc(
+      doc(
+        db,
+        "users",
+        credential.user.uid
+      ),
+      {
+        name:name,
+        email:email,
+        createdAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+    message.style.color = "#66734f";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "✅ Тіркелу сәтті аяқталды!"
+      : currentLanguage === "ru"
+      ? "✅ Регистрация завершена!"
+      : "✅ Registration successful!";
+
+    setTimeout(()=>{
+      closeAuth();
+    },900);
+
+  }catch(error){
+
+    console.error(error);
+
+    message.style.color = "#b85b52";
+
+    if(error.code === "auth/email-already-in-use"){
+
+      message.textContent =
+        currentLanguage === "kk"
+        ? "Бұл email бұрын тіркелген."
+        : currentLanguage === "ru"
+        ? "Этот email уже зарегистрирован."
+        : "This email is already registered.";
+
+    }else if(error.code === "auth/invalid-email"){
+
+      message.textContent =
+        currentLanguage === "kk"
+        ? "Email дұрыс енгізілмеген."
+        : currentLanguage === "ru"
+        ? "Неверный email."
+        : "Invalid email.";
+
+    }else{
+
+      message.textContent =
+        currentLanguage === "kk"
+        ? "Тіркелу кезінде қате пайда болды."
+        : currentLanguage === "ru"
+        ? "Ошибка при регистрации."
+        : "Registration error.";
+    }
+  }
+
+});
+
+
+/* LOGIN */
+
+document.getElementById("loginButton")
+.addEventListener("click",async ()=>{
+
+  const email =
+    document.getElementById("loginEmail")
+      .value.trim();
+
+  const password =
+    document.getElementById("loginPassword")
+      .value;
+
+  if(!email || !password){
+
+    message.style.color = "#b85b52";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "Email және құпия сөзді енгізіңіз."
+      : currentLanguage === "ru"
+      ? "Введите email и пароль."
+      : "Enter email and password.";
+
+    return;
+  }
+
+  try{
+
+    message.style.color = "#66734f";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "Кіруде..."
+      : currentLanguage === "ru"
+      ? "Вход..."
+      : "Signing in...";
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "✅ Сәтті кірдіңіз!"
+      : currentLanguage === "ru"
+      ? "✅ Вы вошли!"
+      : "✅ Signed in!";
+
+    setTimeout(()=>{
+      closeAuth();
+    },700);
+
+  }catch(error){
+
+    console.error(error);
+
+    message.style.color = "#b85b52";
+
+    message.textContent =
+      currentLanguage === "kk"
+      ? "Email немесе құпия сөз қате."
+      : currentLanguage === "ru"
+      ? "Неверный email или пароль."
+      : "Incorrect email or password.";
+  }
+
+});
+
+
+/* LOGOUT */
+
+document.getElementById("logoutButton")
+.addEventListener("click",async ()=>{
+
+  await signOut(auth);
+
+  closeAuth();
+
+});
+
+
+/* SAVE SALARY */
+
+window.saveSalaryToFirebase =
+async function(salary){
+
+  const user = auth.currentUser;
+
+  if(!user){
+    return;
+  }
+
+  try{
+
+    await setDoc(
+      doc(
+        db,
+        "users",
+        user.uid
+      ),
+      {
+        salary:Number(salary),
+        updatedAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      "Salary save error:",
+      error
+    );
+  }
+};
+
+
+/* SAVE GOAL */
+
+window.saveGoalToFirebase =
+async function(name,price,months){
+
+  const user = auth.currentUser;
+
+  if(!user){
+    return;
+  }
+
+  try{
+
+    await addDoc(
+      collection(
+        db,
+        "users",
+        user.uid,
+        "goals"
+      ),
+      {
+        name:name || "Мақсат",
+        price:Number(price),
+        months:Number(months),
+        createdAt:serverTimestamp()
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      "Goal save error:",
+      error
+    );
+  }
+};
+
+
+/* SAVE IMPULSE TEST */
+
+window.saveImpulseToFirebase =
+async function(product,price,score,result){
+
+  const user = auth.currentUser;
+
+  if(!user){
+    return;
+  }
+
+  try{
+
+    await addDoc(
+      collection(
+        db,
+        "users",
+        user.uid,
+        "impulseTests"
+      ),
+      {
+        product:product,
+        price:Number(price),
+        score:Number(score),
+        result:result,
+        createdAt:serverTimestamp()
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      "Impulse save error:",
+      error
+    );
+  }
+};
+
+
+/* LOAD USER DATA */
+
+async function loadUserData(user){
+
+  try{
+
+    const snapshot =
+      await getDoc(
+        doc(
+          db,
+          "users",
+          user.uid
+        )
+      );
+
+    if(snapshot.exists()){
+
+      const data = snapshot.data();
+
+      if(data.salary){
+
+        document.getElementById(
+          "salaryInput"
+        ).value = data.salary;
+
+        calculateSalary();
+      }
+    }
+
+  }catch(error){
+
+    console.error(
+      "User data load error:",
+      error
+    );
+  }
+}
+
+
+/* ACCOUNT BUTTON */
+
+window.updateAccountButton =
+function(){
+
+  const user = auth.currentUser;
+
+  if(user){
+
+    accountButton.textContent =
+      "👤 " +
+      (
+        user.displayName ||
+        user.email
+      );
+
+  }else{
+
+    accountButton.textContent =
+      currentLanguage === "kk"
+      ? "👤 Кіру"
+      : currentLanguage === "ru"
+      ? "👤 Войти"
+      : "👤 Login";
+  }
+};
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    window.updateAccountButton();
+
+    if(user){
+
+      authForms.style.display = "none";
+      userBox.style.display = "block";
+
+      document.getElementById(
+        "userName"
+      ).textContent =
+        user.displayName ||
+        "SMART MONEY";
+
+      document.getElementById(
+        "userEmail"
+      ).textContent =
+        user.email || "";
+
+      await loadUserData(user);
+
+    }else{
+
+      authForms.style.display = "block";
+      userBox.style.display = "none";
+
+      loginBox.style.display = "block";
+      registerBox.style.display = "none";
+    }
+  }
+);
+
 </script>
+
 </body>
 </html>
